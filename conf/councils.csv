@@ -1,0 +1,439 @@
+0101,Halden,13717
+0104,Moss,14608
+0105,Sarpsborg,24254
+0106,Fredrikstad,34223
+0111,Hvaler,1932
+0118,Aremark,589
+0119,Marker,1603
+0121,Rømskog,296
+0122,Trøgstad,2394
+0123,Spydeberg,2363
+0124,Askim,6829
+0125,Eidsberg,5024
+0127,Skiptvet,1520
+0128,Rakkestad,3443
+0135,Råde,2994
+0136,Rygge,6427
+0137,Våler (Østf.),2011
+0138,Hobøl,2134
+0211,Vestby,6415
+0213,Ski,11907
+0214,Ås,7550
+0215,Frogn,6674
+0216,Nesodden,7438
+0217,Oppegård,10652
+0219,Bærum,49006
+0220,Asker,23415
+0221,Aurskog-Høland,6766
+0226,Sørum,6613
+0227,Fet,4472
+0228,Rælingen,7049
+0229,Enebakk,4285
+0230,Lørenskog,14525
+0231,Skedsmo,22138
+0233,Nittedal,8828
+0234,Gjerdrum,2465
+0235,Ullensaker,13429
+0236,Nes (Ak.),8456
+0237,Eidsvoll,9620
+0238,Nannestad,4775
+0239,Hurdal,1199
+0301,Oslo kommune,320990
+0402,Kongsvinger,8406
+0403,Hamar,13969
+0412,Ringsaker,14631
+0415,Løten,3350
+0417,Stange,8642
+0418,Nord-Odal,2375
+0419,Sør-Odal,3529
+0420,Eidskog,2926
+0423,Grue,2373
+0425,Åsnes,3586
+0426,Våler (Hedm.),1804
+0427,Elverum,9252
+0428,Trysil,3103
+0429,Åmot,2113
+0430,Stor-Elvdal,1264
+0432,Rendalen,924
+0434,Engerdal,620
+0436,Tolga,693
+0437,Tynset,2337
+0438,Alvdal,1019
+0439,Folldal,704
+0441,Os (Hedm.),839
+0501,Lillehammer,12469
+0502,Gjøvik,13743
+0511,Dovre,1227
+0512,Lesja,875
+0513,Skjåk,984
+0514,Lom,1026
+0515,Vågå,1617
+0516,Nord-Fron,2648
+0517,Sel,2631
+0519,Sør-Fron,1399
+0520,Ringebu,1937
+0521,Øyer,2217
+0522,Gausdal,2708
+0528,Østre Toten,6725
+0529,Vestre Toten,5957
+0532,Jevnaker,2853
+0533,Lunner,3788
+0534,Gran,5964
+0536,Søndre Land,2636
+0538,Nordre Land,3100
+0540,Sør-Aurdal,1413
+0541,Etnedal,663
+0542,Nord-Aurdal,2971
+0543,Vestre Slidre,981
+0544,Øystre Slidre,1433
+0545,Vang,684
+0602,Drammen,30640
+0604,Kongsberg,11732
+0605,Ringerike,13748
+0612,Hole,2607
+0615,Flå,495
+0616,Nes (Busk.),1566
+0617,Gol,2127
+0618,Hemsedal,960
+0619,Ål,2073
+0620,Hol,2082
+0621,Sigdal,1564
+0622,Krødsherad,1021
+0623,Modum,6166
+0624,Øvre Eiker,7766
+0625,Nedre Eiker,9819
+0626,Lier,10307
+0627,Røyken,8158
+0628,Hurum,4060
+0631,Flesberg,1117
+0632,Rollag,601
+0633,Nore og Uvdal,1107
+0701,Horten,12180
+0702,Holmestrand,4746
+0704,Tønsberg,19443
+0706,Sandefjord,20228
+0709,Larvik,19434
+0711,Svelvik,2895
+0713,Sande (Vestf.),3669
+0714,Hof,1355
+0716,Re (f.o.m. 2002),3782
+0719,Andebu,2418
+0720,Stokke,4840
+0722,Nøtterøy,9164
+0723,Tjøme,2247
+0728,Lardal,1082
+0805,Porsgrunn,16313
+0806,Skien,24195
+0807,Notodden,5913
+0811,Siljan,976
+0814,Bamble,6028
+0815,Kragerø,4960
+0817,Drangedal,1826
+0819,Nome,3029
+0821,Bø (Telem.),2740
+0822,Sauherad,1911
+0826,Tinn,2837
+0827,Hjartdal,700
+0828,Seljord,1361
+0829,Kviteseid,1138
+0830,Nissedal,616
+0831,Fyresdal,583
+0833,Tokke,1015
+0834,Vinje,1614
+0901,Risør,3125
+0904,Grimstad,9205
+0906,Arendal,19591
+0911,Gjerstad,1088
+0912,Vegårshei,807
+0914,Tvedestrand,2697
+0919,Froland,2194
+0926,Lillesand,4189
+0928,Birkenes,1950
+0929,Åmli,809
+0935,Iveland,532
+0937,Evje og Hornnes,1524
+0938,Bygland,541
+0940,Valle,576
+0941,Bykle,387
+1001,Kristiansand,37873
+1002,Mandal,6563
+1003,Farsund,4028
+1004,Flekkefjord,3845
+1014,Vennesla,5710
+1017,Songdalen,2564
+1018,Søgne,4435
+1021,Marnardal,927
+1026,Åseral,365
+1027,Audnedal,651
+1029,Lindesnes,2016
+1032,Lyngdal,3304
+1034,Hægebostad,650
+1037,Kvinesdal,2537
+1046,Sirdal,755
+1101,Eigersund,6107
+1102,Sandnes,28544
+1103,Stavanger,57816
+1106,Haugesund,16611
+1111,Sokndal,1391
+1112,Lund,1286
+1114,Bjerkreim,1046
+1119,Hå,6946
+1120,Klepp,7065
+1121,Time,7015
+1122,Gjesdal,4142
+1124,Sola,9678
+1127,Randaberg,4002
+1129,Forsand,461
+1130,Strand,4701
+1133,Hjelmeland,1110
+1134,Suldal,1578
+1135,Sauda,2074
+1141,Finnøy,1181
+1142,Rennesøy,1746
+1144,Kvitsøy,222
+1145,Bokn,368
+1146,Tysvær,3939
+1149,Karmøy,16716
+1151,Utsira,88
+1154,Vindafjord (t.o.m. 2005),0
+1159,Ølen (t.o.m. 2005),0
+1160,Vindafjord,3403
+1201,Bergen,126124
+1211,Etne,1625
+1216,Sveio,2119
+1219,Bømlo,4636
+1221,Stord,7380
+1222,Fitjar,1163
+1223,Tysnes,1179
+1224,Kvinnherad,5499
+1227,Jondal,455
+1228,Odda,3264
+1231,Ullensvang,1407
+1232,Eidfjord,423
+1233,Ulvik,482
+1234,Granvin,390
+1235,Voss,5961
+1238,Kvam,3499
+1241,Fusa,1528
+1242,Samnanger,1022
+1243,Os (Hord.),7189
+1244,Austevoll,1804
+1245,Sund,2515
+1246,Fjell,8856
+1247,Askøy,10272
+1251,Vaksdal,1797
+1252,Modalen,158
+1253,Osterøy,3073
+1256,Meland,2842
+1259,Øygarden,1852
+1260,Radøy,2066
+1263,Lindås,5999
+1264,Austrheim,1157
+1265,Fedje,242
+1266,Masfjorden,700
+1401,Flora,4724
+1411,Gulen,973
+1412,Solund,370
+1413,Hyllestad,585
+1416,Høyanger,1835
+1417,Vik,1137
+1418,Balestrand,587
+1419,Leikanger,906
+1420,Sogndal,3208
+1421,Aurland,739
+1422,Lærdal,893
+1424,Årdal,2504
+1426,Luster,2028
+1428,Askvoll,1221
+1429,Fjaler,1222
+1430,Gaular,1120
+1431,Jølster,1212
+1432,Førde,5184
+1433,Naustdal,1080
+1438,Bremanger,1632
+1439,Vågsøy,2553
+1441,Selje,1114
+1443,Eid,2336
+1444,Hornindal,450
+1445,Gloppen,2285
+1449,Stryn,2898
+1502,Molde,11668
+1503,Kristiansund  (t.o.m. 2007),0
+1504,Ålesund,20120
+1505,Kristiansund,11140
+1511,Vanylven,1394
+1514,Sande (M. og R.),1058
+1515,Herøy (M. og R.),3491
+1516,Ulstein,3052
+1517,Hareid,2101
+1519,Volda,3775
+1520,Ørsta,4304
+1523,Ørskog,926
+1524,Norddal,715
+1525,Stranda,1938
+1526,Stordal,425
+1528,Sykkylven,3172
+1529,Skodje,1678
+1531,Sula,3334
+1532,Giske,2924
+1534,Haram,3728
+1535,Vestnes,2802
+1539,Rauma,3236
+1543,Nesset,1252
+1545,Midsund,828
+1546,Sandøy,550
+1547,Aukra,1350
+1548,Fræna,3992
+1551,Eide,1420
+1554,Averøy,2327
+1556,Frei (t.o.m. 2007),0
+1557,Gjemnes,1053
+1560,Tingvoll,1354
+1563,Sunndal,3252
+1566,Surnadal,2465
+1567,Rindal,828
+1569,Aure (t.o.m. 2005),0
+1571,Halsa,715
+1572,Tustna (t.o.m. 2005),0
+1573,Smøla,983
+1576,Aure,1561
+1601,Trondheim,85572
+1612,Hemne,1823
+1613,Snillfjord,418
+1617,Hitra,2039
+1620,Frøya,1961
+1621,Ørland,2278
+1622,Agdenes,727
+1624,Rissa,2699
+1627,Bjugn,2095
+1630,Åfjord,1407
+1632,Roan,426
+1633,Osen,456
+1634,Oppdal,2930
+1635,Rennebu,1088
+1636,Meldal,1792
+1638,Orkdal,5006
+1640,Røros,2525
+1644,Holtålen,882
+1648,Midtre Gauldal,2645
+1653,Melhus,6315
+1657,Skaun,2780
+1662,Klæbu,2272
+1663,Malvik,5060
+1664,Selbu,1726
+1665,Tydal,363
+1702,Steinkjer,9538
+1703,Namsos,5565
+1711,Meråker,1123
+1714,Stjørdal,9345
+1717,Frosta,1097
+1718,Leksvik,1493
+1719,Levanger,8113
+1721,Verdal,6240
+1723,Mosvik  (t.o.m. 2011),0
+1724,Verran,1157
+1725,Namdalseid,720
+1729,Inderøy (t.o.m. 2011),0
+1736,Snåase Snåsa,869
+1738,Lierne,612
+1739,Røyrvik,211
+1740,Namsskogan,412
+1742,Grong,1095
+1743,Høylandet,510
+1744,Overhalla,1484
+1748,Fosnes,274
+1749,Flatanger,481
+1750,Vikna,1824
+1751,Nærøy,2195
+1755,Leka,268
+1756,Inderøy (f.o.m. 2012),2728
+1804,Bodø,21916
+1805,Narvik,8540
+1811,Bindal,719
+1812,Sømna,889
+1813,Brønnøy,3432
+1815,Vega,544
+1816,Vevelstad,234
+1818,Herøy (Nordl.),811
+1820,Alstahaug,3233
+1822,Leirfjord,907
+1824,Vefsn,5998
+1825,Grane,680
+1826,Hattfjelldal,605
+1827,Dønna,621
+1828,Nesna,886
+1832,Hemnes,2012
+1833,Rana,11318
+1834,Lurøy,847
+1835,Træna,215
+1836,Rødøy,535
+1837,Meløy,2860
+1838,Gildeskål,888
+1839,Beiarn,481
+1840,Saltdal,2098
+1841,Fauske,4307
+1842,Skjerstad (t.o.m. 2004),0
+1845,Sørfold,887
+1848,Steigen,1123
+1849,Hábmer Hamarøy,861
+1850,Divtasvuodna Tysfjord,915
+1851,Lødingen,1015
+1852,Tjeldsund,587
+1853,Evenes,625
+1854,Ballangen,1180
+1856,Røst,258
+1857,Værøy,316
+1859,Flakstad,562
+1860,Vestvågøy,4723
+1865,Vågan,4080
+1866,Hadsel,3588
+1867,Bø (Nordl.),1307
+1868,Øksnes,1964
+1870,Sortland,4416
+1871,Andøy,2273
+1874,Moskenes,515
+1901,Harstad (t.o.m. 2012),0
+1902,Tromsø,32354
+1903,Harstad (f.o.m. 2013),10914
+1911,Kvæfjord,1334
+1913,Skånland,1278
+1915,Bjarkøy (t.o.m. 2012),0
+1917,Ibestad,682
+1919,Gratangen,542
+1920,Lavangen,419
+1922,Bardu,1709
+1923,Salangen,1008
+1924,Målselv,2890
+1925,Sørreisa,1438
+1926,Dyrøy,562
+1927,Tranøy,715
+1928,Torsken,434
+1929,Berg,423
+1931,Lenvik,4830
+1933,Balsfjord,2456
+1936,Karlsøy,1062
+1938,Lyngen,1283
+1939,Storfjord,803
+1940,Gáivuotna Kåfjord,970
+1941,Skjervøy,1244
+1942,Nordreisa,2102
+1943,Kvænangen,552
+2002,Vardø,1102
+2003,Vadsø,2728
+2004,Hammerfest,4639
+2011,Guovdageaidnu Kautokeino,1088
+2012,Alta,8077
+2014,Loppa,518
+2015,Hasvik,515
+2017,Kvalsund,506
+2018,Måsøy,615
+2019,Nordkapp,1492
+2020,Porsanger Porsángu Porsanki,1845
+2021,Kárásjohka Karasjok,1109
+2022,Lebesby,633
+2023,Gamvik,553
+2024,Berlevåg,501
+2025,Deatnu Tana,1314
+2027,Unjárga Nesseby,418
+2028,Båtsfjord,1026
+2030,Sør-Varanger,4552
