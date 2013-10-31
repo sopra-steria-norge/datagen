@@ -13,8 +13,10 @@ import play.api.libs.json.__
 import play.api.mvc.Action
 import play.api.mvc.Controller
 import generator.DataPoint
+import generator.JacksonWrapper
+import play.api.libs.json.Json
 object JsonPull extends Controller{
-
+implicit val dataPointWrites = Json.writes[DataPoint]
   val conf = ConfigFactory.load("application.conf")
   val random = new Random()
 	
@@ -48,19 +50,21 @@ object JsonPull extends Controller{
     val ts = currentTs.toString()
     val writer = new StringWriter
     var i = 0
+    //writer.append("[")
     val measures = sources.map(source => {
       source.addTo(currentTs, random, measurementFrequencyMin)
       i = i+1
-    	if(i %10000 == 0) println(i)
-      source.getMeasure(ts, writer)      
+    	if(i %100 == 0) println(i)
+    	source.getMeasure(currentTs)
+      //source.getMeasure(ts, writer)      
     })
     writer.append("]")
     println("data")
     val data = writer.toString()
     writer.close()
     
-    println("sending data")
+    println("sending data" + measures)
     currentTs = currentTs.plusMinutes(measurementFrequencyMin)
-    Ok(data)
+    Ok(Json.toJson(measures))
   }
 }
