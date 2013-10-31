@@ -56,7 +56,7 @@ case class LargeBusiness(override val council:String, id:Int) extends Business(c
 	def annualUsage = 1000000
 }
 case class SmallBusiness(override val council:String, id:Int) extends Business(council, id, "SB"){
-	def annualUsage = 10000
+	def annualUsage = 50000
 }
 abstract class Business(override val council:String, id:Int, typ:String) extends MeasurementSource(council+typ+id, council){
   def daily(ts:DateTime) = {
@@ -106,7 +106,7 @@ case class WorkingHousehold(override val council:String, id:Int) extends Househo
     }
     relativeUsage / 2130.0 * 24
   }
-  def annualUsage = 220
+  def annualUsage = 22000
 }
 
 case class RetiredHousehold(override val council:String, id:Int) extends Household(council, id, "RH")
@@ -136,7 +136,7 @@ case class RetiredHousehold(override val council:String, id:Int) extends Househo
     }
     relativeUsage / 2030.0 * 24
   }
-  def annualUsage = 150
+  def annualUsage = 8000
 }
 abstract class Household(override val council:String, id:Int, typ:String) extends MeasurementSource(council+typ+id, council){
 
