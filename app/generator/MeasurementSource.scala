@@ -7,35 +7,36 @@ import java.io.StringWriter
 abstract class MeasurementSource(key:String, val council:String) {
   val randomness = 0.3
   var aggKwh = 0.0
-  var kwh = 0.0
+  var kw = 0.0
   def getMeasure(ts:DateTime) =
-    DataPoint(key, council, ts.toString(), aggKwh, kwh)
+    DataPoint(key, council, ts.toString(), aggKwh, kw)
   def getMeasure(ts:String, writer:StringWriter) = {
-    DataPoint.writeToJson(writer, key, council, ts, aggKwh, kwh)
+    DataPoint.writeToJson(writer, key, council, ts, aggKwh, kw)
   }
   protected def addTo(annualUsageRate:Double, factor:Double, random:Random, measurementFrequency:Int) = {
     val usage = factor * annualUsageRate /365.0 /(24*60/measurementFrequency)
     val r = randomness * random.nextGaussian() * usage
     //println("factor " + factor+"  r "+r+"  aggKw" + aggKw)
-    kwh = usage +r
+    kw = (usage +r) * (60/measurementFrequency)
     aggKwh += usage +r
   }
   protected def addToDay(annualUsageRate:Double, factor:Double, random:Random) = {
     val usage = factor * annualUsageRate / 365.0
     val r = randomness/10 * random.nextGaussian() * usage
     //println("factor " + factor+"  r "+r+"  aggKw" + aggKw)
-    kwh = usage +r
+    kw = (usage +r) / 24
     aggKwh += usage +r
   }
-  protected def addToMonth(annualUsageRate:Double, factor:Double, random:Random) = {
+  protected def addToMonth(annualUsageRate:Double, factor:Double, random:Random, ts:DateTime) = {
     val usage = factor * annualUsageRate / 12
     val r = randomness/10 * random.nextGaussian() * usage
     //println("factor " + factor+"  r "+r+"  aggKw" + aggKw)
-    kwh = usage +r
+    kw = (usage +r) *12 /365 /24
     aggKwh += usage +r
   }
   def addTo(ts: DateTime, random:Random, measurementFrequency:Int) : Unit
-  def addToDay(ts: DateTime, random:Random) : Unit
+  def addToDay(ts: DateTime, random:Random) = 
+    addTo(ts, random, 24*60)
   def addToMonth(ts: DateTime, random:Random) : Unit
 }
 
@@ -78,11 +79,8 @@ abstract class Business(override val council:String, id:Int, typ:String) extends
   def addTo(ts: DateTime, random:Random, measurementFrequency:Int){
     addTo(annualUsage, generalType*daily(ts)*monthly(ts), random, measurementFrequency)
   }
-  def addToDay(ts: DateTime, random:Random){
-    addToDay(annualUsage, generalType*monthly(ts)*daily(ts), random)
-  }
   def addToMonth(ts: DateTime, random:Random){
-    addToMonth(annualUsage, generalType*monthly(ts), random)
+    addToMonth(annualUsage, generalType*monthly(ts), random, ts)
   }
 }
 case class WorkingHousehold(override val council:String, id:Int) extends Household(council, id, "WH")
@@ -170,10 +168,7 @@ abstract class Household(override val council:String, id:Int, typ:String) extend
   def addTo(ts: DateTime, random:Random, measurementFrequency:Int){
     addTo(annualUsage, generalType*daily(ts)*monthly(ts), random, measurementFrequency)
   }
-  def addToDay(ts: DateTime, random:Random){
-    addToDay(annualUsage, generalType*monthly(ts)*daily(ts), random)
-  }
   def addToMonth(ts: DateTime, random:Random){
-    addToMonth(annualUsage, generalType*monthly(ts), random)
+    addToMonth(annualUsage, generalType*monthly(ts), random, ts)
   }
 }
