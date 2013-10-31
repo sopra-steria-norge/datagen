@@ -120,13 +120,13 @@ object JsonPushParallel extends Controller {
   }
   
   //executes a function on a list of items in sequence
-  def serialiseFutures[A, B](l: Iterable[A])(fn: A ⇒ Future[B])
+  def serialiseFutures[A, B](l: Iterable[A])(fn: A => Future[B])
   	(implicit ec: ExecutionContext): Future[List[B]] =
   		l.foldLeft(Future(List.empty[B])) {
-  			(previousFuture, next) ⇒
+  			(previousFuture, next) =>
   				for {
-  					previousResults ← previousFuture
-  					next ← fn(next)
+  					previousResults <- previousFuture
+  					next <- fn(next)
   				} yield previousResults :+ next
   		}
 }
