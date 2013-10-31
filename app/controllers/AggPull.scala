@@ -1,11 +1,8 @@
 package controllers
 
 import scala.util.Random
-
 import org.joda.time.DateTime
-
 import com.typesafe.config.ConfigFactory
-
 import generator.Generator
 import generator.JacksonWrapper
 import generator.MeasurementSource
@@ -15,8 +12,11 @@ import play.api.libs.json.JsError
 import play.api.libs.json.__
 import play.api.mvc.Action
 import play.api.mvc.Controller
+import play.api.libs.json.Json
+import generator.DataPoint
 
 object AggPull extends Controller{
+	implicit val dataPointWrites = Json.writes[DataPoint]
 	
   val conf = ConfigFactory.load("application.conf")
   val random = new Random()
@@ -51,7 +51,7 @@ object AggPull extends Controller{
       source.getMeasure(currentTs)
     })
     currentTs = currentTs.plusDays(1)
-    Ok(JacksonWrapper.serialize(measures))
+    Ok(Json.toJson(measures))
   }
 
   def pullMonth = Action {
@@ -61,6 +61,6 @@ object AggPull extends Controller{
       source.getMeasure(currentTs)
     })
     currentTs = currentTs.plusMonths(1)
-    Ok(JacksonWrapper.serialize(measures))
+    Ok(Json.toJson(measures))
   }
 }
