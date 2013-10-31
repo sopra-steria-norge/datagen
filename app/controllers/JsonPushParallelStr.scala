@@ -110,7 +110,7 @@ object JsonPushParallelStr extends Controller {
         val ss = datapoints.map(dp => 
           "stationId="+dp.stationId+
           " council="+dp.council+
-          " ts=" +dp.timeStamp+
+          " timeStamp=" +dp.timeStamp+
           " kw=" + dp.kw+
           " cumkwh="+dp.cumkwh);
         val sss = ss.reduce(_+"\n"+_)
