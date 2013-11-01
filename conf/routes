@@ -8,6 +8,7 @@ GET     /               controllers.Application.index
 POST	/push/start		controllers.JsonPushParallel.start
 POST	/pushStr/start		controllers.JsonPushParallelStr.start
 POST	/pushOne/start		controllers.JsonPushOne.start
+POST	/pushNoBrace/start		controllers.JsonPushParallelWithoutBrace.start
 
 #debugging only, pointing the server to send data to itself
 POST	/receivePush	controllers.ReceivePush.data
