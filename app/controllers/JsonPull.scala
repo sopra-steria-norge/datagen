@@ -45,26 +45,51 @@ implicit val dataPointWrites = Json.writes[DataPoint]
     })
 	}
 
-  def pullChunk = Action {
+  def pullChunkOld = Action {
     println("current time " + currentTs)
     val ts = currentTs.toString()
-    val writer = new StringWriter
     var i = 0
-    //writer.append("[")
     val measures = sources.map(source => {
       source.addTo(currentTs, random, measurementFrequencyMin)
       i = i+1
     	if(i %100 == 0) println(i)
     	source.getMeasure(currentTs)
-      //source.getMeasure(ts, writer)      
     })
-    writer.append("]")
-    println("data")
-    val data = writer.toString()
-    writer.close()
-    
-    println("sending data" + measures)
     currentTs = currentTs.plusMinutes(measurementFrequencyMin)
     Ok(Json.toJson(measures))
+  }
+  
+  def pullChunk = Action {
+    println("current time " + currentTs)
+    val ts = currentTs.toString()
+    val writer = new StringWriter
+    var i = 0
+    writer.append("[")
+    var measures = sources.map(source => {
+      source.addTo(currentTs, random, measurementFrequencyMin)
+      i = i+1
+    	//if(i %100 == 0) println(i)
+    	//source.getMeasure(currentTs)
+      
+      //if(i == 1 || i ==2) {
+        if(i > 1) writer.append(",")
+        //source.getMeasure(ts, writer)
+        
+      //}
+      source.getMeasure(ts, writer)
+    })
+    
+    //sources.last.getMeasure(ts, writer)
+    writer.append("]")
+    //println("data")
+    val data = writer.toString()
+    //writer.close()
+    
+    //println("sending data" + data)
+    currentTs = currentTs.plusMinutes(measurementFrequencyMin)
+    Ok(data)//.as("application/json")
+    
+    .withHeaders(
+        "Content-Type" -> "application/json")
   }
 }
