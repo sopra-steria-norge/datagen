@@ -112,7 +112,7 @@ object JsonPushParallel extends Controller {
           case a if (a.status==200) => true
           case b => {
             println("Failure response: "+b.status)
-            false
+            true
           }
         })        
       }
