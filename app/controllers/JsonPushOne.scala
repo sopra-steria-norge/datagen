@@ -98,7 +98,6 @@ object JsonPushOne extends Controller {
    
     serialiseFutures(measures)({datapoint =>
       {
-        println("sending chunk ")
         WS.url(url).post(Json.toJson(datapoint)).filter({
           case a if (a.status==200 || a.status==201 || a.status==202) => true
           case b => {
