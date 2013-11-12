@@ -1,5 +1,7 @@
 package generator
 
+import java.util.Locale
+
 case class DataPoint(
     stationId: String,
     council: String,
@@ -24,9 +26,9 @@ object DataPoint{
     writer.append("\",\"timeStamp\":\"")
     writer.append(timeStamp)
     writer.append("\",\"kw\":")
-    writer.append("%f".format(kw))
+    writer.append("%f".formatLocal(Locale.ENGLISH, kw))
     writer.append(",\"cumkwh\":")
-    writer.append("%f".format(cumkwh))
+    writer.append("%f".formatLocal(Locale.ENGLISH, cumkwh))
     writer.append("}")
   }
 }
