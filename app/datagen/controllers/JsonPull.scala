@@ -20,6 +20,7 @@ import play.api.mvc.ResponseHeader
 import play.api.libs.iteratee.Enumerator
 import java.io.ByteArrayInputStream
 import java.io.InputStream
+import play.api.libs.iteratee.Concurrent
 
 object JsonPull extends Controller{
 implicit val dataPointWrites = Json.writes[DataPoint]
@@ -50,32 +51,32 @@ implicit val dataPointWrites = Json.writes[DataPoint]
       e => BadRequest("Detected error:"+ JsError.toFlatJson(e))) 
     })
 	}
-  
+
   def pullChunkChunk = Action {
     println("current time " + currentTs)
     val ts = currentTs.toString()
     
     currentTs = currentTs.plusMinutes(measurementFrequencyMin)
     import scala.concurrent.ExecutionContext.Implicits.global
-    val enu = Enumerator.outputStream{os=>
+    val e = Concurrent.unicast[Array[Byte]](channel =>{
       var sb = new StringBuilder
       var j = 0
-      os.write('[')
+      sb.append('[')
       sources.foreach(source => {
       	source.addTo(currentTs, random, measurementFrequencyMin)
       	j = j+1
       	if(j > 1) sb.append(',')
         source.getMeasure(ts, sb)
         if(j % 1000 == 0){
-          os.write(sb.toString().getBytes())
+          channel.push(sb.toString().getBytes())
           sb = new StringBuilder
         }
       })
-      os.write(sb.toString().getBytes())
-      os.write(']')
-      os.close
-    }
-    Ok.chunked(enu >>> Enumerator.eof).withHeaders(
+      sb.append(']')
+      channel.push(sb.toString().getBytes())
+      channel.end
+    })
+    Ok.chunked(e >>> Enumerator.eof).withHeaders(
       "Content-Type"->"application/json"
     )  
   }
