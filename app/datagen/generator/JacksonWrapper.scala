@@ -1,10 +1,10 @@
-package generator
+package datagen.generator
 
 import java.lang.reflect.{Type, ParameterizedType}
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.scala.DefaultScalaModule
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.`type`.TypeReference;
+import java.io.StringWriter
 
 object JacksonWrapper {
   val mapper = new ObjectMapper()

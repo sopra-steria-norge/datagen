@@ -1,10 +1,6 @@
-package generator
-
-import com.typesafe.config.{ConfigValue, Config, ConfigFactory}
-import java.util.Map.Entry
-import org.joda.time.DateTime
+package datagen.generator
+import com.typesafe.config.Config
 import scala.collection.JavaConverters._
-import scala.io.Source
 
 object Generator {
   

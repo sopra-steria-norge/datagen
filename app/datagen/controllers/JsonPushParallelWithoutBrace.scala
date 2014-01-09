@@ -1,4 +1,4 @@
-package controllers
+package datagen.controllers
 
 import scala.concurrent.ExecutionContext
 import scala.concurrent.ExecutionContext.Implicits.global
@@ -9,8 +9,8 @@ import scala.util.Random
 import scala.util.Success
 import org.joda.time.DateTime
 import com.typesafe.config.ConfigFactory
-import generator.Generator
-import generator.MeasurementSource
+import datagen.generator.Generator
+import datagen.generator.MeasurementSource
 import play.api.libs.functional.syntax.functionalCanBuildApplicative
 import play.api.libs.functional.syntax.toFunctionalBuilderOps
 import play.api.libs.json.JsError
@@ -20,9 +20,10 @@ import play.api.libs.ws.WS
 import play.api.mvc.Action
 import play.api.mvc.Controller
 import play.libs.Akka
-import generator.DataPoint
+import datagen.generator.DataPoint
+import datagen.generator.Generator
 
-object JsonPushOne extends Controller {
+object JsonPushParallelWithoutBrace extends Controller {
   
   implicit val dataPointWrites = Json.writes[DataPoint]
   
@@ -33,6 +34,7 @@ object JsonPushOne extends Controller {
   var measurementFrequencyMin = 15
   var startTime = DateTime.parse("2013-01-01")
   var sendDelaySec = 5
+  var dataPerCall = 100
   var url = "http://localhost:9000/receivePush"
   var sources = Seq[MeasurementSource]()
   
@@ -43,17 +45,19 @@ object JsonPushOne extends Controller {
     (__ \ 'startDate).read[String] and
     (__ \ 'url).read[String] and
     (__ \ 'councilFilter).read[String] and
-    (__ \ 'parallel).read[Int]
+    (__ \ 'parallel).read[Int] and
+    (__ \ 'dataPerCall).read[Int]
   ) tupled
   
     def start = Action(parse.json) { (request =>
-    request.body.validate[(Int, Int ,Int, String, String, String, Int)].map{ 
-        case (intervalCountArg, measurementFrequencyMinArg, sendDelaySecArg, dateString, urlArg, councilFilterArg, parallelArg) => {
+    request.body.validate[(Int, Int ,Int, String, String, String, Int, Int)].map{ 
+        case (intervalCountArg, measurementFrequencyMinArg, sendDelaySecArg, dateString, urlArg, councilFilterArg, parallelArg, dataPerCallArg) => {
           intervalCount = intervalCountArg
           measurementFrequencyMin = measurementFrequencyMinArg
           sendDelaySec = sendDelaySecArg
         	startTime = DateTime.parse(dateString)
         	url = urlArg
+        	dataPerCall = dataPerCallArg
         	sources = Generator.createSources(conf, councilFilterArg)
         	random.setSeed(0)
         	val perSource = sources.size / parallelArg + 1
@@ -95,14 +99,23 @@ object JsonPushOne extends Controller {
       x.getMeasure(ts)
     })
     
-   
-    serialiseFutures(measures)({datapoint =>
+    val subSets = for(i <- 0 to measures.size/dataPerCall) yield {
+        	  val from = i*dataPerCall
+        	  val to  = Math.min(dataPerCall*(i+1)-1,measures.size-1)
+        	  println("subset "+i+": "+from+":"+to)
+        	  measures.slice(from, to)
+   	}
+        
+    serialiseFutures(subSets)({datapoints =>
       {
-        WS.url(url).post(Json.toJson(datapoint)).filter({
-          case a if (a.status==200 || a.status==201 || a.status==202) => true
+        var data = Json.toJson(datapoints).toString
+        data = data.substring(1, data.length()-1)
+        println("sending chunk ")
+        WS.url(url).post(data)filter({
+          case a if (a.status==200) => true
           case b => {
             println("Failure response: "+b.status)
-            false
+            true
           }
         })        
       }

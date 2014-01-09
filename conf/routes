@@ -5,20 +5,21 @@
 # Home page
 GET     /               controllers.Application.index
 
-POST	/push/start		controllers.JsonPushParallel.start
-POST	/pushStr/start		controllers.JsonPushParallelStr.start
-POST	/pushOne/start		controllers.JsonPushOne.start
-POST	/pushNoBrace/start		controllers.JsonPushParallelWithoutBrace.start
+POST	/push/start		datagen.controllers.JsonPushParallel.start
+POST	/pushStr/start		datagen.controllers.JsonPushParallelStr.start
+POST	/pushOne/start		datagen.controllers.JsonPushOne.start
+POST	/pushNoBrace/start		datagen.controllers.JsonPushParallelWithoutBrace.start
 
 #debugging only, pointing the server to send data to itself
-POST	/receivePush	controllers.ReceivePush.data
+POST	/receivePush	datagen.controllers.ReceivePush.data
 
-POST	/pull/init		controllers.JsonPull.init
-GET     /pull/chunk		controllers.JsonPull.pullChunk
+POST	/pull/init		datagen.controllers.JsonPull.init
+GET     /pull/chunk		datagen.controllers.JsonPull.pullChunk
+GET     /pull/chunkChunk		datagen.controllers.JsonPull.pullChunkChunk
 
-POST	/aggPull/init	controllers.AggPull.init
-GET     /aggPull/day	controllers.AggPull.pullDay
-GET     /aggPull/month	controllers.AggPull.pullMonth
+POST	/aggPull/init	datagen.controllers.AggPull.init
+GET	/aggPull/day	datagen.controllers.AggPull.pullDay
+GET     /aggPull/month	datagen.controllers.AggPull.pullMonth
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

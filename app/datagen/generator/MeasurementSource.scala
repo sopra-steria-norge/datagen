@@ -1,8 +1,9 @@
-package generator
+package datagen.generator
 
 import org.joda.time.DateTime
 import scala.util.Random
 import java.io.StringWriter
+import java.io.OutputStream
 
 abstract class MeasurementSource(key:String, val council:String) {
   val randomness = 0.3
@@ -12,6 +13,12 @@ abstract class MeasurementSource(key:String, val council:String) {
     DataPoint(key, council, ts.toString(), aggKwh, kw)
   def getMeasure(ts:String, writer:StringWriter) = {
     DataPoint.writeToJson(writer, key, council, ts, aggKwh, kw)
+  }
+  def getMeasure(ts:String, sb:StringBuilder) = {
+    DataPoint.writeToJson(sb, key, council, ts, aggKwh, kw)
+  }
+   def getMeasure(ts:String, sb:OutputStream) = {
+    DataPoint.writeToJson(sb, key, council, ts, aggKwh, kw)
   }
   protected def addTo(annualUsageRate:Double, factor:Double, random:Random, measurementFrequency:Int) = {
     val usage = factor * annualUsageRate /365.0 /(24*60/measurementFrequency)

@@ -1,11 +1,9 @@
-package controllers
+package datagen.controllers
 
 import scala.util.Random
 import org.joda.time.DateTime
 import com.typesafe.config.ConfigFactory
-import generator.Generator
-import generator.JacksonWrapper
-import generator.MeasurementSource
+import datagen.generator.MeasurementSource
 import play.api.libs.functional.syntax.functionalCanBuildApplicative
 import play.api.libs.functional.syntax.toFunctionalBuilderOps
 import play.api.libs.json.JsError
@@ -13,7 +11,8 @@ import play.api.libs.json.__
 import play.api.mvc.Action
 import play.api.mvc.Controller
 import play.api.libs.json.Json
-import generator.DataPoint
+import datagen.generator.Generator
+import datagen.generator.DataPoint
 
 object AggPull extends Controller{
 	implicit val dataPointWrites = Json.writes[DataPoint]

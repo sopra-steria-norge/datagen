@@ -1,12 +1,7 @@
-package controllers
+package datagen.controllers
 
 import play.api._
 import play.api.mvc._
-import generator.DataPoint
-import scala.util.Random
-import org.joda.time.DateTime
-import com.typesafe.config.ConfigFactory
-import generator.Generator
 import play.api.libs.json._
 import play.api.libs.functional.syntax._
 

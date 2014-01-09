@@ -1,4 +1,4 @@
-package controllers
+package datagen.controllers
 
 import scala.concurrent.ExecutionContext
 import scala.concurrent.ExecutionContext.Implicits.global
@@ -9,20 +9,20 @@ import scala.util.Random
 import scala.util.Success
 import org.joda.time.DateTime
 import com.typesafe.config.ConfigFactory
-import generator.Generator
-import generator.MeasurementSource
+import datagen.generator.MeasurementSource
 import play.api.libs.functional.syntax.functionalCanBuildApplicative
 import play.api.libs.functional.syntax.toFunctionalBuilderOps
 import play.api.libs.json.JsError
-import play.api.libs.json.Json
 import play.api.libs.json.__
+import play.api.libs.json.Json
 import play.api.libs.ws.WS
 import play.api.mvc.Action
 import play.api.mvc.Controller
 import play.libs.Akka
-import generator.DataPoint
+import datagen.generator.Generator
+import datagen.generator.DataPoint
 
-object JsonPushParallel extends Controller {
+object JsonPushParallelStr extends Controller {
   
   implicit val dataPointWrites = Json.writes[DataPoint]
   
@@ -107,11 +107,18 @@ object JsonPushParallel extends Controller {
     
     serialiseFutures(subSets)({datapoints =>
       {
+        val ss = datapoints.map(dp => 
+          "stationId="+dp.stationId+
+          " council="+dp.council+
+          " timeStamp=" +dp.timeStamp+
+          " kw=" + dp.kw+
+          " cumkwh="+dp.cumkwh);
+        val sss = ss.reduce(_+"\n"+_)
         println("sending chunk ")
-        WS.url(url).post(Json.toJson(datapoints)).filter({
+        WS.url(url).post(sss).filter({
           case a if (a.status==200) => true
           case b => {
-            println("Failure response: "+b.status)
+            println("Failure response: "+b.status+", continuing")
             true
           }
         })        

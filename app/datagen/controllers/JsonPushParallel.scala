@@ -1,4 +1,4 @@
-package controllers
+package datagen.controllers
 
 import scala.concurrent.ExecutionContext
 import scala.concurrent.ExecutionContext.Implicits.global
@@ -9,8 +9,7 @@ import scala.util.Random
 import scala.util.Success
 import org.joda.time.DateTime
 import com.typesafe.config.ConfigFactory
-import generator.Generator
-import generator.MeasurementSource
+import datagen.generator.MeasurementSource
 import play.api.libs.functional.syntax.functionalCanBuildApplicative
 import play.api.libs.functional.syntax.toFunctionalBuilderOps
 import play.api.libs.json.JsError
@@ -20,9 +19,10 @@ import play.api.libs.ws.WS
 import play.api.mvc.Action
 import play.api.mvc.Controller
 import play.libs.Akka
-import generator.DataPoint
+import datagen.generator.Generator
+import datagen.generator.DataPoint
 
-object JsonPushParallelWithoutBrace extends Controller {
+object JsonPushParallel extends Controller {
   
   implicit val dataPointWrites = Json.writes[DataPoint]
   
@@ -104,13 +104,11 @@ object JsonPushParallelWithoutBrace extends Controller {
         	  println("subset "+i+": "+from+":"+to)
         	  measures.slice(from, to)
    	}
-        
+    
     serialiseFutures(subSets)({datapoints =>
       {
-        var data = Json.toJson(datapoints).toString
-        data = data.substring(1, data.length()-1)
         println("sending chunk ")
-        WS.url(url).post(data)filter({
+        WS.url(url).post(Json.toJson(datapoints)).filter({
           case a if (a.status==200) => true
           case b => {
             println("Failure response: "+b.status)
