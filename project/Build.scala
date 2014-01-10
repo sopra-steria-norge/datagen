@@ -15,7 +15,8 @@ object ApplicationBuild extends Build {
   "org.joda" % "joda-convert" % "1.5",
   "com.typesafe" % "config" % "1.0.2",
   "org.streum" %% "configrity-core" % "1.0.0",
-  "com.fasterxml.jackson.module" %% "jackson-module-scala" % "2.1.3"
+  "com.fasterxml.jackson.module" %% "jackson-module-scala" % "2.1.3",
+  "org.elasticsearch" % "elasticsearch" % "0.90.9"
 
   )
   

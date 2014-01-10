@@ -47,6 +47,7 @@ object DataPoint{
     sb.append("%f".formatLocal(Locale.ENGLISH, cumkwh))
     sb.append("}")    
   }
+
   def writeToJson(sb:OutputStream,
       stationId:String, council:String, timeStamp:String, cumkwh:Double, kw:Double) :Unit = {
     sb.write("{\"stationId\":\"".getBytes())
@@ -62,4 +63,20 @@ object DataPoint{
     sb.write('}')    
   }
   
+}
+object DataPointJava{
+    def writeToJson(sb:java.lang.StringBuilder,
+      stationId:String, council:String, timeStamp:String, cumkwh:Double, kw:Double) :Unit = {
+    sb.append("{\"stationId\":\"")
+    sb.append(stationId)
+    sb.append("\",\"council\":\"")
+    sb.append(council)
+    sb.append("\",\"timeStamp\":\"")
+    sb.append(timeStamp)
+    sb.append("\",\"kw\":")
+    sb.append("%f".formatLocal(Locale.ENGLISH, kw))
+    sb.append(",\"cumkwh\":")
+    sb.append("%f".formatLocal(Locale.ENGLISH, cumkwh))
+    sb.append("}")    
+  }
 }
