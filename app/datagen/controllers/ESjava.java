@@ -21,12 +21,14 @@ public class ESjava {
 	
 	public void init(String clusterName, String indexName){
 		Node node;
+		String esConfig = "/etc/elasticsearch/elasticsearch.yml";
 		if(!"".equals(clusterName)){
+			System.out.println("use clustername and not settings from file"+esConfig);
 			node = nodeBuilder().clusterName(clusterName).client(true).node();
 		}else{
-			System.out.println("load from /etc/elasticsearch/elasticsearch.yml");
+			System.out.println("load settings from "+esConfig);
 			node = nodeBuilder().settings(nodeBuilder().settings().					
-					loadFromSource("/etc/elasticsearch/elasticsearch.yml").build()).client(true).node();
+					loadFromSource(esConfig).build()).client(true).node();
 		}
 		client = node.client();
 		bulk = client.prepareBulk();
