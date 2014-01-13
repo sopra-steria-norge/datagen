@@ -26,7 +26,7 @@ public class ESjava {
 		}else{
 			System.out.println("load from /etc/elasticsearch/elasticsearch.yml");
 			node = nodeBuilder().settings(nodeBuilder().settings().					
-					loadFromSource("/etc/elasticsearch/elasticsearch.yml")).client(true).build();
+					loadFromSource("/etc/elasticsearch/elasticsearch.yml").build()).client(true).node();
 		}
 		client = node.client();
 		bulk = client.prepareBulk();
