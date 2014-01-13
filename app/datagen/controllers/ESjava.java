@@ -16,13 +16,13 @@ public class ESjava {
 	BulkRequestBuilder bulk;
 	private String indexName;
 	
-	public ESjava(){
-		Node node = nodeBuilder().clusterName("oskar_cluster").client(true).node();
-		client = node.client();
-		bulk = client.prepareBulk();
+	public ESjava(){		
 	}
 	
-	public void setIndexName(String indexName){
+	public void init(String clusterName, String indexName){
+		Node node = nodeBuilder().clusterName(clusterName).client(true).node();
+		client = node.client();
+		bulk = client.prepareBulk();
 		this.indexName = indexName;
 	}
 	

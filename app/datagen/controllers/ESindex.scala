@@ -43,6 +43,7 @@ implicit val dataPointWrites = Json.writes[DataPoint]
     (__ \ 'measurementFrequencyMin).read[Int] and
     (__ \ 'startDate).read[String] and
     (__ \ 'councilFilter).read[String] and
+    (__ \ 'clusterName).read[String] and
     (__ \ 'indexName).read[String] and
     (__ \ 'parallel).read[Int]
   ) tupled
@@ -50,11 +51,11 @@ implicit val dataPointWrites = Json.writes[DataPoint]
   var ESjava = IndexedSeq[ESjava]()
   
 	def init = Action(parse.json) { (request =>
-    request.body.validate[(Int, String, String, String, Int)].map{ 
-        case (measurementFrequencyMinArg, dateString, councilFilterArg, indexName, parallelArg) => {
+    request.body.validate[(Int, String, String, String, String, Int)].map{ 
+        case (measurementFrequencyMinArg, dateString, councilFilterArg, clusterName, indexName, parallelArg) => {
           println("init start")
           ESjava = for(i <- 1 to parallelArg) yield {new ESjava()}
-          ESjava.map(_.setIndexName(indexName))
+          ESjava.map(_.init(clusterName, indexName))
           measurementFrequencyMin = measurementFrequencyMinArg
         	currentTs = DateTime.parse(dateString)
         	sources = Generator.createSources(conf, councilFilterArg)
