@@ -20,7 +20,14 @@ public class ESjava {
 	}
 	
 	public void init(String clusterName, String indexName){
-		Node node = nodeBuilder().clusterName(clusterName).client(true).node();
+		Node node;
+		if(!"".equals(clusterName)){
+			node = nodeBuilder().clusterName(clusterName).client(true).node();
+		}else{
+			System.out.println("load from /etc/elasticsearch/elasticsearch.yml");
+			node = nodeBuilder().settings(nodeBuilder().settings().					
+					loadFromSource("/etc/elasticsearch/elasticsearch.yml")).client(true).build();
+		}
 		client = node.client();
 		bulk = client.prepareBulk();
 		this.indexName = indexName;
