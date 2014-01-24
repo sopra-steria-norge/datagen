@@ -28,10 +28,10 @@ import java.util.Locale
 import play.libs.Akka
 import scala.concurrent.duration.DurationInt
 import scala.concurrent.ExecutionContext.Implicits.global
-import datagen.mongodb.MongoDBWriter
-import datagen.mongodb.BatchedWriter
+import datagen.writer.MongoDBWriter
+import datagen.writer.BatchedWriter
 
-class PullMongo extends Pull{
+object PullMongo extends Pull{
   implicit val rds = (
     (__ \ 'measurementFrequencyMin).formatNullable[Int] and
     (__ \ 'batchSize).formatNullable[Int] and
@@ -55,13 +55,12 @@ class PullMongo extends Pull{
             database = databaseArg.getOrElse("mydb")
             collection = collectionArg.getOrElse("myCol")
             initArgs(parallelArg, batchSizeArg, measurementFrequencyMinArg, dateString, councilFilterArg)            
-            Ok("init complete with "+sources.size+" sources")
           }
         }.recoverTotal{(
       e => BadRequest("Detected error:"+ JsError.toFlatJson(e))) 
     })
 	}
   
-  def createSources = 
+  def createWriters = 
     for(i <- 1 to parallel) yield {new MongoDBWriter(uri, database, collection, batchSize).asInstanceOf[BatchedWriter]}
 }

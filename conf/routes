@@ -29,3 +29,6 @@ GET     /assets/*file               controllers.Assets.at(path="/public", file)
 
 POST	/mongo/init		datagen.controllers.PullMongo.init
 GET     /mongo/chunk	datagen.controllers.PullMongo.pullChunk
+
+POST	/elastic/init	datagen.controllers.PullElasticSearch.init
+GET     /elastic/chunk	datagen.controllers.PullElasticSearch.pullChunk

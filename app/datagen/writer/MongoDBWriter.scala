@@ -1,4 +1,4 @@
-package datagen.mongodb
+package datagen.writer
 
 import com.mongodb.casbah.MongoClient
 import com.mongodb.WriteConcern
@@ -7,15 +7,6 @@ import com.mongodb.DBObject
 import com.mongodb.casbah.commons.MongoDBObject
 import datagen.generator.MeasurementSource
 import com.mongodb.casbah.MongoClientURI
-
-trait Writer{
-  def write(key:String, council:String, timeStamp:String, cumkwh:Double, kw:Double) : Unit
-  def close : Unit
-}
-
-trait BatchedWriter extends Writer{
-  def sendBatch() : Unit
-}
 
 class MongoDBWriter(uri:String, dbName:String, collectionName:String, batchSize: Integer) extends BatchedWriter{
 	//val uri = MongoClientURI("mongodb://localhost:27017,localhost:27018,localhost:27019/")

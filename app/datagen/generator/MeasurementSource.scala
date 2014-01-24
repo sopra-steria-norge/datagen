@@ -4,7 +4,7 @@ import org.joda.time.DateTime
 import scala.util.Random
 import java.io.StringWriter
 import java.io.OutputStream
-import datagen.mongodb.Writer
+import datagen.writer.Writer
 
 abstract class MeasurementSource(key:String, val council:String) {
   val randomness = 0.3

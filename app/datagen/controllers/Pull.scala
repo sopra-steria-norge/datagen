@@ -28,8 +28,7 @@ import java.util.Locale
 import play.libs.Akka
 import scala.concurrent.duration.DurationInt
 import scala.concurrent.ExecutionContext.Implicits.global
-import datagen.mongodb.MongoDBWriter
-import datagen.mongodb.BatchedWriter
+import datagen.writer.BatchedWriter
 
 trait Pull extends Controller {
 	implicit val dataPointWrites = Json.writes[DataPoint]
@@ -59,15 +58,17 @@ trait Pull extends Controller {
 	    println("subset "+i+": "+from+":"+to)
 	    sources.slice(from, to)        		
 	  }
+  	Ok("init complete with "+sources.size+" sources")
 	}
 	
-	protected def createSources : IndexedSeq[BatchedWriter]
+	protected def createWriters : IndexedSeq[BatchedWriter]
 
   def pullChunk = Action {
     val time = "current time " + currentTs
     println(time)
+    batchedWriter = createWriters
+    println("connections established")
     pullStarted = DateTime.now()
-    batchedWriter = createSources
     val ts = currentTs.toString()
     
     currentTs = currentTs.plusMinutes(measurementFrequencyMin)
