@@ -4,11 +4,13 @@ import org.joda.time.DateTime
 import scala.util.Random
 import java.io.StringWriter
 import java.io.OutputStream
+import datagen.mongodb.Writer
 
 abstract class MeasurementSource(key:String, val council:String) {
   val randomness = 0.3
   var aggKwh = 0.0
   var kw = 0.0
+  def getKey = key
   def getMeasure(ts:DateTime) =
     DataPoint(key, council, ts.toString(), aggKwh, kw)
   def getMeasure(ts:String, writer:StringWriter) = {
@@ -23,6 +25,9 @@ abstract class MeasurementSource(key:String, val council:String) {
    def getMeasure(ts:String, sb:java.lang.StringBuilder) = {
     DataPointJava.writeToJson(sb, key, council, ts, aggKwh, kw)
   }
+   def getMearsure(ts:String, writer:Writer) ={
+     writer.write(key, council, ts, aggKwh, kw)
+   }
   protected def addTo(annualUsageRate:Double, factor:Double, random:Random, measurementFrequency:Int) = {
     val usage = factor * annualUsageRate /365.0 /(24*60/measurementFrequency)
     val r = randomness * random.nextGaussian() * usage
