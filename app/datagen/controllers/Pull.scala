@@ -31,40 +31,6 @@ import scala.concurrent.ExecutionContext.Implicits.global
 import datagen.mongodb.MongoDBWriter
 import datagen.mongodb.BatchedWriter
 
-object MongoPull extends Pull{
-  implicit val rds = (
-    (__ \ 'measurementFrequencyMin).formatNullable[Int] and
-    (__ \ 'batchSize).formatNullable[Int] and
-	  (__ \ 'startDate).formatNullable[String] and
-    (__ \ 'councilFilter).formatNullable[String] and
-    (__ \ 'parallel).formatNullable[Int] and
-    (__ \ 'uri).formatNullable[String] and
-    (__ \ 'database).formatNullable[String] and
-    (__ \ 'collection).formatNullable[String]
-  ) tupled
-  
-  var uri = ""
-  var database = ""
-  var collection = "" 
-  
-  def init = Action(parse.json) { (request =>
-    request.body.validate[(Option[Int], Option[Int], Option[String], Option[String],Option[Int], Option[String], Option[String], Option[String])].map{ 
-          case (measurementFrequencyMinArg, batchSizeArg, dateString, councilFilterArg, parallelArg, uriArg, databaseArg, collectionArg) => {
-            println("init start")
-            uri = uriArg.getOrElse("mongodb://localhost:27017/?replicaSet=rep")
-            database = databaseArg.getOrElse("mydb")
-            collection = collectionArg.getOrElse("myCol")
-            initArgs(parallelArg, batchSizeArg, measurementFrequencyMinArg, dateString, councilFilterArg)            
-            Ok("init complete with "+sources.size+" sources")
-          }
-        }.recoverTotal{(
-      e => BadRequest("Detected error:"+ JsError.toFlatJson(e))) 
-    })
-	}
-  
-  def createSources = 
-    for(i <- 1 to parallel) yield {new MongoDBWriter(uri, database, collection, batchSize).asInstanceOf[BatchedWriter]}
-}
 trait Pull extends Controller {
 	implicit val dataPointWrites = Json.writes[DataPoint]
   val conf = ConfigFactory.load("application.conf")
