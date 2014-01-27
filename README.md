@@ -6,9 +6,12 @@ Avhengigheter:
  - play framework: http://www.playframework.com/  version 2.2.1 (basert pa scala 2.10.2 og sbt 0.13.0)
  - koden er i scala (og java) https://github.com/steria/datagen
  - du trenger å sende json meldinger til datagen, et bra verktøy er Postman (plugin til chrome). Husk å sette contentType headeren til "application/json"
- Etter at du installert play så starter du serveren med "play run" og den vil da vare tilgjengelig på http://localhost:9000
+
+
+Etter at du installert play så starter du serveren med "play run" og den vil da vare tilgjengelig på http://localhost:9000
  
- Der er flere måter å bruke serveren på, og hvis du trenger en annen måte så bare leg den ved! Det vanlige patternet er at man først gjør et kall til "init" for å configurere serveren, og etter det gjør et nytt kall for å sende data. Alle init kall tar parametene:
+ 
+Der er flere måter å bruke serveren på, og hvis du trenger en annen måte så bare leg den ved! Det vanlige patternet er at man først gjør et kall til "init" for å configurere serveren, og etter det gjør et nytt kall for å sende data. Alle init kall tar parametene:
  - councilFilter (String) kommaseparert liste på kommunenummer, f.eks. "1151" gir lite data og "" gir all data (default: "")
  - startDate (String) dato for første målingen, f.eks. 2013-01-01 (default: current time)
  - batchSize (Int) hvor mye data skal sendes til serveren i hver melding (default: 10000)
@@ -27,8 +30,10 @@ Avhengigheter:
  * send en GET til http://localhost:9000/elastic/chunk. Dette vil få serven til å skedulere arbeid for å laste in måledata fra de målepunkter som er satt i init for ett tidspunkt, og siden oppdatere tidspunktet slik at du kan gjøre et nytt kall og få mer data  
 
 Hvis du forsøker kjøre elasticsearch på AWS kan du ikke bruke multicast, og du trenger da dette i din elasticsearch.yaml:
+```
 discovery.zen.ping.multicast.enabled: false
-discovery.zen.ping.unicast.hosts: ["172.31.31.127:9300"] # ip her serveren sin ip, og hvis du har flere noder må du ha en kommaseparert liste her
+discovery.zen.ping.unicast.hosts: ["172.31.31.127:9300"] # ip her serveren sin ip, og hvis du har flere noder må du ha en komma separert liste her
+```
 
 MongoDB
 =======
@@ -55,5 +60,4 @@ TODO
 * støtte hente data via wget (og elastic river etc)
 * støtte hente data i csv (via wget)
 * støtte andre teknologier (Cassandra?)
-
    
