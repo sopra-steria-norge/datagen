@@ -39,6 +39,9 @@ MongoDB
 =======
 * installere mongodb
 * start mongod med "mongod --replSet rep". Hvis du ikke endrer noe starter denne på port 27017
+* første gangen du kjører mongodb må du initialisere replSet:et
+  - start mongo (ikke samme som mongod, mongo er bare en klient)
+  - kjør "rs.initiate()", dette bruker mongodb til å sikre at dette ikke er et eksisterende kluster som en ny klient skal bruke 
 * send en POST til http://localhost:9000/mongo/init med parametere som {"councilFilter":"1151", "uri":"mongodb://localhost:27017/?replicaSet=rep"}. Parameterene i tillegg til de som støttes av alle init er
   - uri (String) obligatorisk, en connectionstring til mongodb
   - database (String) databasen som skal brukes (default: "mydb")
