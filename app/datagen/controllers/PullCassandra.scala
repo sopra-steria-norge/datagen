@@ -38,7 +38,6 @@ object PullCassandra extends Pull{
 	  (__ \ 'startDate).formatNullable[String] and
     (__ \ 'councilFilter).formatNullable[String] and
     (__ \ 'parallel).formatNullable[Int] and
-    (__ \ 'uri).formatNullable[String] and
     (__ \ 'resetDB).formatNullable[Boolean] and
     (__ \ 'keyspace).formatNullable[String]
   ) tupled
@@ -48,10 +47,9 @@ object PullCassandra extends Pull{
   var keyspace = "" 
   
   def init = Action(parse.json) { (request =>
-    request.body.validate[(Option[Int], Option[Int], Option[String], Option[String],Option[Int], Option[String], Option[Boolean], Option[String])].map{ 
-          case (measurementFrequencyMinArg, batchSizeArg, dateString, councilFilterArg, parallelArg, uriArg, resetDBArg, keyspaceArg) => {
+    request.body.validate[(Option[Int], Option[Int], Option[String], Option[String],Option[Int], Option[Boolean], Option[String])].map{ 
+          case (measurementFrequencyMinArg, batchSizeArg, dateString, councilFilterArg, parallelArg, resetDBArg, keyspaceArg) => {
             println("init start")
-            //uri = uriArg.getOrElse("mongodb://localhost:27017/?replicaSet=rep")
             resetDB = resetDBArg.getOrElse(false)
             keyspace = keyspaceArg.getOrElse("POC")
             initArgs(parallelArg, batchSizeArg, measurementFrequencyMinArg, dateString, councilFilterArg)            

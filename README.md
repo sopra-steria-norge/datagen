@@ -53,7 +53,7 @@ Cassandra
 * installere cassandra 2.0.2
 * starte cassandra
 * send POST til http://{{hostport}}/cassandra/init med parametere som {"councilFilter":"1151"}. Parameterene i tillegg til de som støttes av alle init er:
-  - resetDB (Boolean) slette all data i cassandra og init for ny test (default: false)
+  - resetDB (Boolean) slette all data i cassandra og init for ny test. Reset vil skje hver gang du kaller GET (default: false)
   - keyspace (String) keyspace der data skal lagres (default: POC)
 * send GET til http://{{hostport}}/cassandra/chunk
 
