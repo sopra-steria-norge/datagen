@@ -29,3 +29,6 @@ GET     /mongo/chunk	datagen.controllers.PullMongo.pullChunk
 
 POST	/elastic/init	datagen.controllers.PullElasticSearch.init
 GET     /elastic/chunk	datagen.controllers.PullElasticSearch.pullChunk
+
+POST	/cassandra/init	datagen.controllers.PullCassandra.init
+GET     /cassandra/chunk	datagen.controllers.PullCassandra.pullChunk
