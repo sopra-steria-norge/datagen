@@ -20,7 +20,7 @@ Der er flere måter å bruke serveren på, og hvis du trenger en annen måte så bare
  
  Elasticsearch
  =============
- * installere elasticsearch
+ * installere elasticsearch 0.90.9
  * oppdatere project/Build.scala med riktig elasticsearch versjon, merk at det må vare samme på datagen som serveren
  * send en POST til http://localhost:9000/elastic/init med parametere som {"councilFilter":"1151", "clusterName":"myCluster", "multicast":false, "hosts":"1.2.3.4"}. Parameterene tillegg til de som støttes av alle init er
   - clusterName (String) obligatorisk, navnet på ditt elasticsearch cluster
@@ -47,6 +47,15 @@ MongoDB
   - database (String) databasen som skal brukes (default: "mydb")
   - collection (String) collection som skal skrives til i mongodb (default: "myCol")
 * send en GET til http://localhost:9000/mongo/chunk. Dette vil få serven til å skedulere arbeid for å laste in måledata fra de målepunkter som er satt i init for ett tidspunkt, og siden oppdatere tidspunktet slik at du kan gjøre et nytt kall og få mer data  
+
+Cassandra
+=========
+* installere cassandra 2.0.2
+* starte cassandra
+* send POST til http://{{hostport}}/cassandra/init med parametere som {"councilFilter":"1151"}. Parameterene i tillegg til de som støttes av alle init er:
+  - resetDB (Boolean) slette all data i cassandra og init for ny test (default: false)
+  - keyspace (String) keyspace der data skal lagres (default: POC)
+* send GET til http://{{hostport}}/cassandra/chunk
 
 Data som blir generert
 ======================
